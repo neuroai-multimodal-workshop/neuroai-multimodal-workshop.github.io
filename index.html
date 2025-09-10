@@ -2,6 +2,33 @@
 <html lang="en">
 <head>
     <style>
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--text);
+        }
+        .footer img {
+            width: 20px;
+            height: 20px;
+        }
+
+        
     .speaker-avatar img {
       width: 80px;
       height: 80px;
@@ -928,7 +955,7 @@
 
                     <!-- Program Committee removed per request -->
                 </div>
-
+                
                 <!-- Registration Section -->
                 <div id="registration" class="content-section hidden">
                     <h2>Registration Information</h2>
@@ -961,10 +988,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="footer">
+                    <a href="https://x.com/NeuroAI_WS_AAAI" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X (Twitter)">
+                        Follow us on X
+                    </a>
+                </div>
+                
             </div>
         </div>
     </div>
-
+                
     <script>
         function showSection(sectionId) {
             // Hide all sections
