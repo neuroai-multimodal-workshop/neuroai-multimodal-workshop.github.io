@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--text);
+        }
+        .footer img {
+            width: 20px;
+            height: 20px;
+        }
+
+        
+    .speaker-avatar img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%; /* makes it circular */
+      object-fit: cover;
+    }
+  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroAI Workshop 2026 - AAAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f3f4f6; /* light neutral */
+            --panel: #ffffff; /* card/panel background */
+            --muted: #6b6b6b; /* accents */
+            --accent: #6b6b6b; /* single-tone accent */
+            --border: #e6e8ea;
+            --text: #2d3748;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            background: transparent;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 320px;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.06);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            background: var(--muted);
+            color: rgb(249, 249, 249);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('neuroai_2.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: 0.3em 1.2em;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: 0.1em 0.8em;
+            border-radius: 6px;
+        }
+
+        .sidebar-content {
+            padding: 1.5rem;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section h3 {
+            color: var(--text);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-item {
+            padding: 0.7rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+            color: var(--muted);
+            background: transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(0,0,0,0.03);
+            border-left-color: var(--muted);
+            color: var(--text);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: var(--accent);
+            border-left-color: var(--muted);
+            color: white;
+            box-shadow: 0 5px 15px rgba(45, 55, 72, 0.08);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-card {
+            background: var(--panel);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.18s ease;
+            box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(74, 85, 104, 0.3);
+        }
+
+        .stats-card .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.2rem;
+        }
+
+        .stats-card .label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metrics-panel {
+            background: var(--panel);
+            color: var(--text);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .metrics-panel h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: 600;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0 0 2rem 0;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.03em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-chip {
+            background: var(--bg);
+            color: var(--muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        .content-wrapper {
+            padding: 2rem 3rem;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .content-section:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section.hidden {
+            display: none;
+        }
+
+        .content-section h2 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            border-bottom: 3px solid var(--muted);
+            padding-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .content-section h3 {
+            color: var(--text);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0,0,0,0.06);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .topic-description {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Speaker Grid */
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .speaker-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: rgba(74, 85, 104, 0.3);
+        }
+
+        .speaker-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--muted);
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .speaker-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .speaker-affiliation {
+            color: var(--muted);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-expertise {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Schedule */
+        .schedule-day {
+            margin-bottom: 2rem;
+        }
+
+        .day-header {
+            background: var(--accent);
+            color: white;
+            padding: 1.0rem 1.2rem;
+            border-radius: 8px 8px 0 0;
+            font-weight: 700;
+            font-size: 1.05rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .schedule-item {
+            display: flex;
+            border: 1px solid var(--border);
+            border-top: none;
+            padding: 1.2rem 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .schedule-item:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .schedule-item:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .schedule-time {
+            min-width: 120px;
+            font-weight: 600;
+            color: var(--muted);
+            padding-right: 1.5rem;
+        }
+
+        .schedule-content {
+            flex: 1;
+        }
+
+        .schedule-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .schedule-description {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Papers */
+        .paper-item {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .paper-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-color: #cbd5e0;
+        }
+
+        .paper-title {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.3;
+        }
+
+        .paper-authors {
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .paper-type {
+            display: inline-block;
+            background: var(--bg);
+            color: var(--muted);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        /* Registration */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.18s ease;
+            background: var(--panel);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--muted);
+            box-shadow: 0 8px 25px rgba(16,24,40,0.06);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--muted);
+            background: var(--panel);
+            transform: scale(1.02);
+        }
+
+        .pricing-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .pricing-period {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .pricing-features li {
+            padding: 0.3rem 0;
+            color: var(--muted);
+            list-style: none;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li:before {
+            content: "✓";
+            color: var(--muted);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .toggle-sidebar {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(45, 55, 72, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-sidebar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+                position: fixed;
+                height: 100vh;
+                z-index: 999;
+                background: white;
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .toggle-sidebar {
+                display: block;
+            }
+            
+            .header {
+                padding: 2rem 1.5rem 1.5rem 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .content-wrapper {
+                padding: 1.5rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .speaker-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>NeuroAI 2026</h2>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="nav-section">
+                    <h3>Navigation</h3>
+                    <div class="nav-item active" onclick="showSection('home')">Overview</div>
+                    <div class="nav-item" onclick="showSection('speakers')">Speakers</div>
+                    <div class="nav-item" onclick="showSection('schedule')">Program Schedule</div>
+                    <div class="nav-item" onclick="showSection('cfp')">Call for Papers</div>
+                    <div class="nav-item" onclick="showSection('papers')">Accepted Papers</div>
+                    <div class="nav-item" onclick="showSection('organizers')">Organizing Committee</div>
+                    <div class="nav-item" onclick="showSection('registration')">Registration</div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-wrapper">
+                <!-- Home Section -->
+                <div id="home" class="content-section">
+                    <div class="header">
+                        <h2>Neuro for AI &amp; AI for Neuro:<br>Towards Multi-Modal Natural Intelligence</h2>
+                        <!-- <h2>Towards Multi-Modal Natural Intelligence</h2> -->
+                        <!-- <div class="subtitle">Bridging Neuroscience and Artificial Intelligence</div> -->
+                        <div class="header-meta">
+                            <div class="meta-chip">January 27, 2026</div>
+                            <div class="meta-chip">AAAI 2026</div>
+                            <div class="meta-chip">Singapore</div>
+                        </div>
+                    </div>
+                    <h3>Workshop Overview</h3>
+
+                    <!-- <p style="margin-bottom: 1rem;">
+                        <a href="https://neuroai-multimodal-workshop.github.io" target="_blank" style="text-decoration: underline; color: var(--link-color, inherit);">
+                            neuroai-multimodal-workshop.github.io
+                        </a>
+                        <br>
+                        <a href="https://neuroai-multimodal-workshop.github.io/AAAI2026-flyerTemplates_RA_AA.pdf" target="_blank" style="text-decoration: underline; color: var(--link-color, inherit);">
+                            /AAAI2026-flyerTemplates_RA_AA.pdf
+                        </a>
+                    </p> -->
+
+                    <!-- <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <a href="https://neuroai-multimodal-workshop.github.io" target="_blank">
+                            <img 
+                                src="https://github.com/neuroai-multimodal-workshop/neuroai-multimodal-workshop.github.io/blob/main/AAAI_NeuroAI_WS_2026_3.png?raw=true" 
+                                alt="AAAI NeuroAI Workshop 2026 Flyer" 
+                                style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                            />
+                        </a>
+                    </div> -->
+
+
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <a href="https://neuroai-multimodal-workshop.github.io" target="_blank">
+                            <img 
+                                src="https://github.com/neuroai-multimodal-workshop/neuroai-multimodal-workshop.github.io/blob/main/AAAI_Workshop_1769972775262.jpeg?raw=true" 
+                                alt="AAAI Workshop Header" 
+                                style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1rem;"
+                            />
+                        </a>
+                    
+                        <a href="https://neuroai-multimodal-workshop.github.io" target="_blank">
+                            <img 
+                                src="https://github.com/neuroai-multimodal-workshop/neuroai-multimodal-workshop.github.io/blob/main/AAAI_NeuroAI_WS_2026_3.png?raw=true" 
+                                alt="AAAI NeuroAI Workshop 2026 Flyer" 
+                                style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                            />
+                        </a>
+                    </div>
+
+
+
+                    <p>
+                        The inaugural <strong>Neuro for AI & AI for Neuro: Towards Multi-Modal Natural Intelligence</strong> workshop was successfully convened on January 27, 2026, in Singapore. This gathering brought together researchers in artificial intelligence, computational neuroscience, and neuromorphic engineering to advance multimodal natural intelligence through a two-way exchange between biology and machine learning.
+                    </p>
+                    
+                    <p>
+                        On the <strong>“Neuro → AI”</strong> front, the workshop explored how principles of cortical microcircuitry—such as inhibitory-excitatory balance, sparse coding, dendritic nonlinearities, and structured connectivity—can inspire efficient and robust multimodal architectures. Sessions highlighted how biologically grounded features derived from large-scale cell-type and connectivity datasets can inform transformer and graph-based models, enhancing their learning performance and energy efficiency.
+                    </p>
+                    
+                    <p>
+                        Conversely, the <strong>“AI → Neuro”</strong> theme showcased how advanced machine-learning techniques are driving new insights into brain function and dysfunction. Presentations and demos featured AI-driven analysis of calcium imaging, electrophysiological, and behavioral data, as well as gradient-based training of biophysically realistic models. Topics included how unsupervised representation learning and causal-inference frameworks can reveal latent circuit motifs, guide closed-loop experiments, and accelerate discovery in both basic and translational neuroscience.
+                    </p>
+                    
+                    <p>
+                        By uniting neuroscience insights with scalable AI tools, the workshop bridged theory, experiment, and application—fostering cross-pollination where AI researchers gained biologically grounded inductive biases, and neuroscientists leveraged modern computational frameworks to advance discovery.
+                    </p>
+                    
+                    <!-- <p>
+                    This workshop will bring together researchers in artificial intelligence, computational neuroscience, and neuromorphic engineering to advance multimodal natural intelligence through a two-way exchange between biology and machine learning.
+                    </p>
+                    
+                    <p>
+                    On the <strong>“Neuro → AI”</strong> front, we will explore how principles of cortical microcircuitry—such as inhibitory-excitatory balance, sparse coding, dendritic nonlinearities, and structured connectivity—can inspire efficient and robust multimodal architectures. Sessions will highlight how biologically grounded features derived from large-scale cell-type and connectivity datasets can inform transformer and graph-based models, enhancing their learning performance and energy efficiency.
+                    </p>
+                    
+                    <p>
+                    Conversely, the <strong>“AI → Neuro”</strong> theme will showcase how advanced machine-learning techniques are driving new insights into brain function and dysfunction. Presentations and demos will feature AI-driven analysis of calcium imaging, electrophysiological, and behavioral data, as well as gradient-based training of biophysically realistic models. Topics will include how unsupervised representation learning and causal-inference frameworks can reveal latent circuit motifs, guide closed-loop experiments, and accelerate discovery in both basic and translational neuroscience.
+                    </p>
+                    
+                    <p>
+                    By uniting neuroscience insights with scalable AI tools, the workshop aims to bridge theory, experiment, and application—fostering cross-pollination where AI researchers gain biologically grounded inductive biases, and neuroscientists leverage modern computational frameworks to advance discovery.
+                    </p> -->
+
+                    <!-- 
+                    <p>
+                        This workshop will bring together researchers in AI, computational neuroscience, and neuromorphic engineering to advance multimodal natural intelligence. The “Neuro → AI” theme will highlight how principles from cortical circuits inspire efficient architectures like transformers and graph models. The “AI → Neuro” theme will show how machine learning drives new insights into neural dynamics from large-scale data. By uniting biological insights with scalable AI tools, the workshop aims to bridge theory, experiment, and application.
+                    </p> -->
+<!--                     
+                    <p>
+                        This workshop aims to facilitate discussions on how insights from neuroscience can inform AI research, 
+                        and conversely, how AI techniques can advance our understanding of neural computation and brain function.
+                    </p>
+ -->
+                    <h3>Research Focus Areas</h3>
+                    <div class="about-grid">
+                        <div class="topic-card">
+                            <div class="topic-icon">🧠</div>
+                            <div class="topic-title">Neuro for AI: Brain-inspired Algorithms</div>
+<!--                             <div class="topic-description">
+                                Computational frameworks that model neural processes, from single neurons to network dynamics
+                            </div> -->
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-icon">🤖</div>
+                            <div class="topic-title">Neuro for AI: Neuromorphic Engineering</div>
+<!--                             <div class="topic-description">
+                                Machine learning models inspired by biological neural networks and cognitive processes
+                            </div> -->
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-icon">🔬</div>
+                            <div class="topic-title">AI for Neuro: Foundation Models for Neuroscience</div>
+<!--                             <div class="topic-description">
+                                Technologies enabling direct communication pathways between the AI and brain data analytics
+                            </div> -->
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-icon">💻</div>
+                            <div class="topic-title">AI for Neuro: AI Models for Multimodal Data Analysis</div>
+<!--                             <div class="topic-description">
+                                Hardware and software systems that mimic neural structures and processing principles
+                            </div> -->
+                        </div>
+                    </div>
+
+<!--                     <h3>Call for Papers</h3>
+                    <p>
+                        We invite submissions on all aspects of the intersection between neuroscience and artificial intelligence. 
+                        Topics of interest include but are not limited to computational neuroscience, neural-inspired machine learning, 
+                        brain-computer interfaces, and neuromorphic computing.
+                    </p> -->
+                </div>
+
+<!-- Organizers Section -->
+                <div id="speakers" class="content-section hidden">
+                    <h2>Speakers</h2>
+                    
+                    <div class="speaker-grid">
+                        <a href="https://www.simonsfoundation.org/people/dmitri-mitya-chklovskii/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://simonsfoundation.imgix.net/wp-content/uploads/2017/07/11144019/Mitya_Chklovskii.jpg?auto=format&q=90" alt="Dmitri ‘Mitya’ Chklovskii" />
+                                </div>
+                                <div class="speaker-name">Dmitri ‘Mitya’ Chklovskii</div> 
+                                <div class="speaker-affiliation">Flatiron Institute</div> 
+                                <div class="speaker-expertise">New York, NY</div>
+                            </div>
+                        </a>
+
+    
+                        <a href="https://profiles.stanford.edu/andreas-tolias" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://media.licdn.com/dms/image/v2/C4E03AQHQOoRpPdcLeQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1646956470288?e=2147483647&v=beta&t=Ki9ICo6B1JravhCRMzuwGArh0qmoPywnce3vMVEsXvU" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Andreas Tolias</div> 
+                                <div class="speaker-affiliation">Stanford University</div> 
+                                <div class="speaker-expertise">Palo Alto, CA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://fairhalllab.com/people/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSHZ0xyT4nKCdE5WOru3060no9Rs3m8NCOzluWmYwnhdB03bw0gvEzHUDhF0lzyn5R0aWv6Mf9kx2D41iDtR1SqnfQ_uWdvGAABrU_sJki4xQ" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Adrienne Fairhall</div> 
+                                <div class="speaker-affiliation">University of Washington</div> 
+                                <div class="speaker-expertise">Seattle, WA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://xcorr.net/about/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ6JdcK3lzTnn0SNIfsH7Wp05kVnw1GC6kLRFg-Wg2qKiucUOgpzia9LGj9dYK4AbPS-MnF8ML-H8rDmbOVCztmYo8T_kq-hNk7q4uvMwSw" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Patrick Mineault</div> 
+                                <div class="speaker-affiliation">Amaranth Foundation</div> 
+                                <div class="speaker-expertise">New York City, NY</div>
+                            </div>
+                        </a>
+
+                        <a href="https://cde.nus.edu.sg/ece/staff/shou-zheng-mike/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://imageio.forbes.com/specials-images/imageserve/62827423ef7b8113322568fa/0x0.jpg?format=jpg&crop=1765,1765,x143,y237,safe&height=416&width=416&fit=bounds" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Mike Zheng</div> 
+                                <div class="speaker-affiliation">National University of Singapore</div> 
+                                <div class="speaker-expertise">Singapore</div>
+                            </div>
+                        </a>
+
+                        <a href="https://people.epfl.ch/martin.schrimpf?lang=en" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpsAhrhO1b57k1Q1miEbkI24MX3nNjyKI5qA&s" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Martin Schrimpf</div> 
+                                <div class="speaker-affiliation">EPFL</div> 
+                                <div class="speaker-expertise">Lausanne, Switzerland</div>
+                            </div>
+                        </a>
+
+                        <a href="https://cs.pku.edu.cn/info/1210/2904.htm" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="data:image/jpeg;base64,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" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Gouzhang Chen</div> 
+                                <div class="speaker-affiliation">Peking University</div> 
+                                <div class="speaker-expertise">Beijing, China</div>
+                            </div>
+                        </a>
+                        
+                        <a href="https://research.monash.edu/en/persons/adeel-razi" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="data:image/jpeg;base64,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" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Adeel Razi</div> 
+                                <div class="speaker-affiliation">Monash University</div> 
+                                <div class="speaker-expertise">Melbourne, Australia</div>
+                            </div>
+                        </a>
+
+                        <a href="https://services.ini.uzh.ch/admin/modules/uzh/person.php?id=51835&back=../uzh/people" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://services.ini.uzh.ch/admin/extras/img_view.php?id=65189" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Elisa Donati</div> 
+                                <div class="speaker-affiliation">University and ETH Zurich</div> 
+                                <div class="speaker-expertise">Zürich, Switzerland</div>
+                            </div>
+                        </a>
+
+
+                        
+                    </div>
+
+                    <!-- Program Committee removed per request -->
+                </div>
+                
+                <!-- Speakers Section -->
+<!--                 <div id="speakers" class="content-section hidden">
+                    <h2>Speakers</h2>
+                        <div style="text-align:center; padding: 3rem 1rem;">
+                            <div style="font-size:1.6rem; font-weight:700; color:var(--muted); margin-bottom:0.6rem;">TBD</div>
+                            <div style="color:var(--muted);">The full list of speakers is coming soon.</div>
+                    </div> -->
+<!--                     <div class="speaker-grid">
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                        <div class="speaker-card">
+                            <div class="speaker-avatar">XZ</div>
+                            <div class="speaker-name">Dr. XYZ</div>
+                            <div class="speaker-affiliation">XYZ</div>
+                            <div class="speaker-expertise">XYZ</div>
+                        </div>
+                    </div> -->
+<!--                 </div> -->
+                
+                <!-- Schedule Section -->
+                <!-- <div id="schedule" class="content-section hidden">
+                    <h2>Program Schedule</h2>
+                    <div style="text-align:center; padding: 3rem 1rem;">
+                        <div style="font-size:1.6rem; font-weight:700; color:var(--muted); margin-bottom:0.6rem;">TBD</div>
+                        <div style="color:var(--muted);">The program schedule is coming soon. Please check back later for the full agenda.</div>
+                    </div>
+                </div> -->
+
+
+
+
+                <div id="schedule" class="content-section hidden">
+                    <h2>Program Schedule</h2>
+                    <div class="schedule-container" style="max-width: 900px; margin: 0 auto; padding: 1rem 0;">
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                            <thead style="background-color: #007bff; color: white;">
+                                <tr>
+                                    <th style="padding: 12px 15px; text-align: left; width: 15%; font-weight: 600;">Time</th>
+                                    <th style="padding: 12px 15px; text-align: left; font-weight: 600;">Event / Speaker</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">9:00–9:10 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;"><strong>Opening Remarks</strong></td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">9:10–9:40 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Andreas Tolias (Stanford University)
+                                        <div style="font-size: 0.9em; color: #555;">Title: Foundation models of the brain</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">9:40–10:10 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Mitya Chklovskii (Flatiron Institute)
+                                        <div style="font-size: 0.9em; color: #555;">Title: What does the neuron do? A self-supervised dynamical model for Neuroscience and AI</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">10:10–10:40 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Adrienne Fairhall (University of Washington)
+                                        <div style="font-size: 0.9em; color: #555;">Title: Self-constructing circuits</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #e6f3ff;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600;">10:40–11:00 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600; color: #007bff;">Coffee Break</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">11:00–11:30 am</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Adeel Razi (Monash University)
+                                        <div style="font-size: 0.9em; color: #555;">Title: Towards Bridging Neuroscience and Artificial Intelligence to Uncover the Principles of Learning</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">11:30–12:00 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Contributed Spotlight Presentations</strong>
+                                        <div style="font-size: 0.9em; color: #555;">Three papers (10 mins each)</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">12:00–12:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Mike Zheng (NUS)
+                                        <div style="font-size: 0.9em; color: #555;">Title: Unified Multimodal Natural Intelligence</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #e6f3ff;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600;">12:30–1:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600; color: #007bff;">Lunch Break</td>
+                                </tr>
+                                <tr style="background-color: #d8f5e6;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600;">1:30–2:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600; color: #28a745;">Poster Session</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">2:30–3:00 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Elisa Donati (University and ETH Zurich)
+                                        <div style="font-size: 0.9em; color: #555;">Title: From Cortical Principles to Neuromorphic Closed-Loop Systems</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">3:00–3:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Martin Schrimpf (EPFL)
+                                        <div style="font-size: 0.9em; color: #555;">Title: AI -> Neuro and Back Again: Integrative Models of the Human Brain in Health and Disease</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #e6f3ff;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600;">3:30–4:00 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #ddd; font-weight: 600; color: #007bff;">Coffee Break</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">4:00–4:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: 1px solid #eee;">
+                                        <strong>Invited Talk:</strong> Guozhang Chen (Peking University)
+                                        <div style="font-size: 0.9em; color: #555;">Title: Unveiling the Low-Dimensional Blueprint of Neural Circuits...</div>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #fff0f0;">
+                                    <td style="padding: 10px 15px; border-bottom: none; font-weight: 600;">4:30–5:30 pm</td>
+                                    <td style="padding: 10px 15px; border-bottom: none; font-weight: 600; color: #dc3545;">Panel Discussion - Patrick Mineault (Amaranth Foundation), Q&A, and Closing Roundtable</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Call for Papers Section -->
+<!--                 <div id="cfp" class="content-section hidden">
+                    <h2>Call for Papers</h2>
+                    <div style="text-align:center; padding: 2.5rem 1rem;">
+                        <div style="font-size:1.2rem; font-weight:600; color:var(--muted); margin-bottom:0.5rem;">Coming soon</div>
+                        <div style="color:var(--muted);">Details about submission topics, deadlines, and submission links will be posted here shortly.</div>
+                    </div>
+                </div> -->
+                <!-- <div id="cfp" class="content-section hidden">
+                    <h2>Call for Papers</h2>
+                    <div style="text-align:center; padding: 2.5rem 1rem;">
+                        <div style="font-size:1.2rem; font-weight:600; color:var(--muted); margin-bottom:0.5rem;">
+                            <a href="https://openreview.net/group?id=AAAI.org%2F2026%2FWorkshop%2FNeuroAI#tab-your-consoles" target="_blank" style="color:var(--muted); text-decoration:none;">
+                                Submit via OpenReview (↗)
+                            </a>
+                        </div>
+                        <div style="color:var(--muted); text-align: justify;">
+                            We invite submissions (authors' identiy anonymized for double-blind review) of full papers or abstracts that describe new research, work in progress, or position statements on relevant topics. 
+                            The full paper submissions should be 8 pages maximum, excluding references, and the abstract submissions should be 2 pages maximum, excluding references, in the 
+                            <a href="https://aaai.org/authorkit26-1/" target="_blank" style="text-decoration: underline; color: inherit;">
+                                AAAI two-column format
+                            </a>.
+                        </div>
+                        
+                    </div>
+                </div> -->
+
+                <div id="cfp" class="content-section hidden">
+                    <h2>Call for Papers (Closed)</h2>
+                    <div style="text-align:center; padding: 2.5rem 1rem; text-decoration: line-through;">
+                        <div style="font-size:1.2rem; font-weight:600; color:var(--muted); margin-bottom:0.5rem;">
+                            <a href="https://openreview.net/group?id=AAAI.org%2F2026%2FWorkshop%2FNeuroAI#tab-your-consoles" target="_blank" style="color:var(--muted); text-decoration:none;">
+                                Submit via OpenReview (↗)
+                            </a>
+                        </div>
+                        <div style="color:var(--muted); text-align: justify;">
+                            We invite submissions (authors' identiy anonymized for double-blind review) of full papers or abstracts that describe new research, work in progress, or position statements on relevant topics. 
+                            The full paper submissions should be 8 pages maximum, excluding references, and the abstract submissions should be 2 pages maximum, excluding references, in the 
+                            <a href="https://aaai.org/authorkit26-1/" target="_blank" style="text-decoration: underline; color: inherit;">
+                                AAAI two-column format
+                            </a>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Papers Section -->
+                <!-- <div id="papers" class="content-section hidden">
+                    <h2>Accepted Papers</h2>
+                    <div style="text-align:center; padding: 3rem 1rem;">
+                        <div style="font-size:1.6rem; font-weight:700; color:var(--muted); margin-bottom:0.6rem;">TBD</div>
+                        <div style="color:var(--muted);">Accepted papers and the full list will be posted here once finalized.</div>
+                    </div>
+
+                    
+                </div> -->
+
+
+                <!-- <div id="papers" class="content-section hidden">
+                    <h2>Accepted Papers</h2>
+                    <div class="papers-container" style="max-width: 900px; margin: 0 auto; padding: 1rem 0;">
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                            <thead style="background-color: #1a8e4f; color: white;">
+                                <tr>
+                                    <th style="padding: 12px 15px; text-align: center; width: 15%; font-weight: 600;">Paper ID</th>
+                                    <th style="padding: 12px 15px; text-align: left; width: 45%; font-weight: 600;">Paper Title</th>
+                                    <th style="padding: 12px 15px; text-align: left; width: 40%; font-weight: 600;">Authors</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: white;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_12</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">An Uncertainty-Aware Framework For Data-Efficient Multi-View Animal Pose Estimation</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Lenny Aharon, Keemin Lee, Karan Sikka, Selmaan N. Chettih, Cole Lincoln Hurwitz, Liam Paninski, Matthew R Whiteway</td></tr>
+                                <tr style="background-color: #f7f7f7;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_16</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Unsupervised Hebbian Learning Drives Biologically Interpretable Pattern Separation in a Hippocampal–Striatal Network</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Jiachuan Wang, Vachan Shetru Jagadeesh, M Ganesh Kumar, Camilo Libedinsky, Shih-Cheng Yen, Andrew Yong-Yi Tan, Jai S Polepalli</td></tr>
+                                <tr style="background-color: white;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_23</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">The DD–DC Neural Network: A Theory of Closed-Loop Control in Adaptive Neural Populations</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Max Kanwal, Nathan Kodama</td></tr>
+                                <tr style="background-color: #f7f7f7;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_25</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">A Biologically Interpretable Cognitive Architecture for Online Structuring of Episodic Memories into Cognitive Maps</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Evgenii Aleksandrovich Dzhivelikian, Nikita Pavlovich Bainaev-Mangilev, Aleksandr Panov</td></tr>
+                                <tr style="background-color: white;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_26</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Hierarchical Predictive Processing for Uncertainty-Aware Multimodal Transformers</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Namita Achyuthan, Bhaskarjyoti Das</td></tr>
+                                <tr style="background-color: #f7f7f7;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_29</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Aleksandr Kovalev, Antonio Lozano, Fabrizio Grani, Cristina Soto Sanchez, Leili Soo, Rocío López-Peco, Adrian Villamarin-Ortiz, Roberto Morollón Ruiz, María del Mar Ayuso Arroyave, Alfonso Rodil, Eduardo Fernández</td></tr>
+                                <tr style="background-color: white;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_30</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Play the (Mis)Match: Using fMRI-Aligned Feature Fine-Tuning to Reveal Shortcut Bias in Deep Neural Networks</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Yang Chen Lin, Chiayun Lee, Po-Chih Kuo</td></tr>
+                                <tr style="background-color: #f7f7f7;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_38</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Oscillatory Dynamics as an Universal Substrate for Computation: From Neural Circuits to Artificial Intelligence</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Felix Effenberger</td></tr>
+                                <tr style="background-color: white;"><td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_47</td><td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">MultiDiffNet: A Multi-Objective Diffusion Framework for Generalizable Brain Decoding</span></td><td style="padding: 15px; border-bottom: 1px solid #eee;">Meng-Chun Zhang, Kateryna Shapovalenko, Yucheng Shao, Yuzhi Guo, Parusha Pradhan</td></tr>
+                                <tr style="background-color: #f7f7f7;"><td style="padding: 15px; border-bottom: none; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_76</td><td style="padding: 15px; border-bottom: none;"><span style="font-weight: 500;">Shared Latent Coordinates and Multi-Observable Phase-Diagram Placement Yield Directly Comparable Mechanistic Fingerprints of Whole-Brain Dynamics</span></td><td style="padding: 15px; border-bottom: none;">Julian Kędys, Cezary Mazurek</td></tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div> -->
+
+
+                <div id="papers" class="content-section hidden">
+                    <h2>Accepted Papers</h2>
+                    <p> The workshop proceedings are available online at <a href="https://proceedings.mlr.press/v308/" target="_blank">PMLR</a>.</p>
+                    <div class="papers-container" style="max-width: 1000px; margin: 0 auto; padding: 1rem 0;">
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                            <thead style="background-color: #1a8e4f; color: white;">
+                                <tr>
+                                    <th style="padding: 12px 15px; text-align: center; width: 10%; font-weight: 600;">Slot</th>
+                                    <th style="padding: 12px 15px; text-align: center; width: 15%; font-weight: 600;">Paper ID</th>
+                                    <th style="padding: 12px 15px; text-align: left; width: 40%; font-weight: 600;">Paper Title</th>
+                                    <th style="padding: 12px 15px; text-align: left; width: 35%; font-weight: 600;">Authors</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">113</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_9</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Electrophysiologically Informed Neuromorphic Spiking Networks for Spatial Navigation</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Lear Cohen, Hadar Cohen Duwek, Elishai Ezra Tsur</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">114</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_12</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">An Uncertainty-Aware Framework For Data-Efficient Multi-View Animal Pose Estimation</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Lenny Aharon, Keemin Lee, Karan Sikka, Selmaan N. Chettih, Cole Lincoln Hurwitz, Liam Paninski, Matthew R Whiteway</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">115</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_16</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Unsupervised Hebbian Learning Drives Biologically Interpretable Pattern Separation in a Hippocampal–Striatal Network</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Jiachuan Wang, Vachan Shetru Jagadeesh, M Ganesh Kumar, Camilo Libedinsky, Shih-Cheng Yen, Andrew Yong-Yi Tan, Jai S Polepalli</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">116</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_18</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Echo State Networks for Efficient Imitation Learning in Robotic Manipulation</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Youngseok Joo, Suhyung Choi, Wooyul Jung, Minsu Lee, Byoung-Tak Zhang</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">117</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_23</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">The DD–DC Neural Network: A Theory of Closed-Loop Control in Adaptive Neural Populations</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Max Kanwal, Nathan Kodama</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">118</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_25</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">A Biologically Interpretable Cognitive Architecture for Online Structuring of Episodic Memories into Cognitive Maps</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Evgenii Aleksandrovich Dzhivelikian, Nikita Pavlovich Bainaev-Mangilev, Aleksandr Panov</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">119</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_26</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Hierarchical Predictive Processing for Uncertainty-Aware Multimodal Transformers</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Namita Achyuthan, Bhaskarjyoti Das</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">120</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_29</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Masked Autoencoders Learn Perception-Relevant Representations from Resting State Neural Data</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Aleksandr Kovalev, Antonio Lozano, Fabrizio Grani, Cristina Soto Sanchez, Leili Soo, Rocío López-Peco, Adrian Villamarin-Ortiz, Roberto Morollón Ruiz, María del Mar Ayuso Arroyave, Alfonso Rodil, Eduardo Fernández</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">121</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_30</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Play the (Mis)Match: Using fMRI-Aligned Feature Fine-Tuning to Reveal Shortcut Bias in Deep Neural Networks</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Yang Chen Lin, Chiayun Lee, Po-Chih Kuo</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">122</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_38</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Oscillatory Dynamics as an Universal Substrate for Computation: From Neural Circuits to Artificial Intelligence</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Felix Effenberger</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">123</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_42</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">TopoDINO: Self-Supervised Topological Representation Learning for Neuronal Morphologies</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Yasser Binbisher</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">124</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_46</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Operator-Theoretic Tools for Conscious and Unconscious Brain Activity</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Yuer Tang, Justin M. Baker</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">125</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_47</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">MultiDiffNet: A Multi-Objective Diffusion Framework for Generalizable Brain Decoding</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Meng-Chun Zhang, Kateryna Shapovalenko, Yucheng Shao, Yuzhi Guo, Parusha Pradhan</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">126</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_48</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Neural Attention Maps Alignment in Vision Transformers and Mammalian Visual Cortex</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Hamd Jalil, Ahmed Rashid Qazi, Asim Iqbal</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">127</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_49</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Cortical-Style Gating for Language: Tiny Personal Critic that Learns in Few Shots</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Aditya Singh, M Ganesh Kumar</td>
+                                </tr>
+                                <tr style="background-color: #f7f7f7;">
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 700; color: #e67e22;">128</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_73</td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-weight: 500;">Learning Rules Matter: Local–Global Perspectives on Double Descent</span></td>
+                                    <td style="padding: 15px; border-bottom: 1px solid #eee;">Amine M'Charrak, Chang Qi, Tommaso Salvatori, Thomas Lukasiewicz</td>
+                                </tr>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 15px; border-bottom: none; text-align: center; font-weight: 700; color: #e67e22;">129</td>
+                                    <td style="padding: 15px; border-bottom: none; text-align: center; font-weight: 600; color: #1a8e4f;">AAAI26_W39_76</td>
+                                    <td style="padding: 15px; border-bottom: none;"><span style="font-weight: 500;">Shared Latent Coordinates and Multi-Observable Phase-Diagram Placement Yield Directly Comparable Mechanistic Fingerprints of Whole-Brain Dynamics</span></td>
+                                    <td style="padding: 15px; border-bottom: none;">Julian Kędys, Cezary Mazurek</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                
+
+                <!-- Organizers Section -->
+                <div id="organizers" class="content-section hidden">
+                    <h2>Organizing Committee</h2>
+                    
+                    <div class="speaker-grid">
+                        <a href="https://profiles.ucsf.edu/reza.abbasi-asl" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://abbasilab.org/wp-content/uploads/2024/03/headshot-855x1024.jpg" alt="Reza Abbasi-Asl" />
+                                </div>
+                                <div class="speaker-name">Reza Abbasi-Asl</div> 
+                                <div class="speaker-affiliation">UCSF</div> 
+                                <div class="speaker-expertise">San Francisco, CA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://tibbtech.com/team/asim/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://media.licdn.com/dms/image/v2/D5603AQHejrd-V24xHQ/profile-displayphoto-shrink_200_200/B56ZU8OEcQGUAY-/0/1740472077268?e=2147483647&v=beta&t=BGS8K8RhYbFHs6-7J9Fdc824Wf6_dYuKk1WDixlN_C0" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Asim Iqbal</div> 
+                                <div class="speaker-affiliation">Tibbling Technologies</div> 
+                                <div class="speaker-expertise">Seattle, WA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://alleninstitute.org/person/shinya-ito/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://cdn.prod.website-files.com/69a0ca6ef8ecfacbc1d10e9b/69c594a183e15ca22d66150b_shinya_ito_temp_web.jpeg" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Shinya Ito</div> 
+                                <div class="speaker-affiliation">Allen Institute</div> 
+                                <div class="speaker-expertise">Seattle, WA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://alleninstitute.org/person/anton-arkhipov/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://pbs.twimg.com/profile_images/1747136229622370305/R1WW9aGq_400x400.jpg" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Anton Arkhipov</div> 
+                                <div class="speaker-affiliation">Allen Institute</div> 
+                                <div class="speaker-expertise">Seattle, WA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://www.sophiasanborn.com/about" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://www.bionic-vision.org/images/people/sophia-sanborn.jpg" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Sophia Sanborn</div> 
+                                <div class="speaker-affiliation">Stanford University</div> 
+                                <div class="speaker-expertise">Palo Alto, CA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://alleninstitute.org/person/macarena-aloi/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLVPTjzNWzcdNZB9Ae8Z1divTARix10CWLoA&s" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Macarena Aloi</div> 
+                                <div class="speaker-affiliation">Allen Institute</div> 
+                                <div class="speaker-expertise">Seattle, WA</div>
+                            </div>
+                        </a>
+
+                        <a href="https://abbasilab.org/people/" target="_blank" style="text-decoration: none; color: inherit;">
+                            <div class="speaker-card">
+                                <div class="speaker-avatar">
+                                    <img src="https://abbasilab.org/wp-content/uploads/2024/06/DSC04562-830x1024.jpg" alt="XYZ photo" />
+                                </div>
+                                <div class="speaker-name">Naomi Donovan</div> 
+                                <div class="speaker-affiliation">UCSF</div> 
+                                <div class="speaker-expertise">San Francisco, CA</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Program Committee removed per request -->
+                </div>
+                                
+                <!-- Registration Section -->
+                <!-- <div id="registration" class="content-section hidden">
+                    <h2>Registration Information</h2>
+
+                    <div style="background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h3 style="color: var(--muted); margin-top: 0;">
+                            For AAAI registration, visa and venue information, 
+                            <a href="https://aaai.org/conference/aaai/aaai-26/registration/" target="_blank" style="text-decoration: underline; color: inherit;">
+                                click here (↗)
+                            </a>
+                        </h3>
+                        <p style="margin-bottom: 0; color: var(--text);">
+                            Register by <strong>November 16, 2025</strong> to secure discounted rates. Regular registration closes on <strong>December 14, 2025</strong>.
+                        </p>
+                    </div>
+
+                    
+
+
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 8px;">
+                        <h3>Important Dates</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div>
+                                <strong>Paper Submission:</strong><br>
+                                <span style="color: var(--muted);">October 30, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Notifications:</strong><br>
+                                <span style="color: var(--muted);">November 15, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Early Registration:</strong><br>
+                                <span style="color: var(--muted);">November 16, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Standard Registration:</strong><br>
+                                <span style="color: var(--muted);">December 14, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Late Registration:</strong><br>
+                                <span style="color: var(--muted);">After December 14, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+
+                <div id="registration" class="content-section hidden">
+                    <h2>Registration Information</h2>
+                    
+                    <div style="background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h3 style="color: var(--muted); margin-top: 0;">
+                            For AAAI registration, visa and venue information, 
+                            <a href="https://aaai.org/conference/aaai/aaai-26/registration/" target="_blank" style="text-decoration: underline; color: inherit;">
+                                click here (↗)
+                            </a>
+                        </h3>
+                        <p style="margin-bottom: 0; color: var(--text);">
+                            Register by <strong style="text-decoration: line-through;">November 16, 2025</strong> to secure discounted rates. Regular registration closes on <strong style="text-decoration: line-through;">December 14, 2025</strong>.
+                        </p>
+                    </div>
+                
+                
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 8px;">
+                        <h3>Important Dates</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                            <div>
+                                <strong>Paper Submission:</strong><br>
+                                <span style="color: var(--muted); text-decoration: line-through;">October 30, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Notifications:</strong><br>
+                                <span style="color: var(--muted); text-decoration: line-through;">November 15, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Early Registration:</strong><br>
+                                <span style="color: var(--muted); text-decoration: line-through;">November 16, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Standard Registration:</strong><br>
+                                <span style="color: var(--muted); text-decoration: line-through;">December 14, 2025</span>
+                            </div>
+                            <div>
+                                <strong>Late Registration:</strong><br>
+                                <span style="color: var(--muted);text-decoration: line-through;">After December 14, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <a href="https://x.com/NeuroAI_WS_AAAI" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X (Twitter)">
+                        Follow us on X
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+                
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update active nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Hide sidebar on mobile after selection
+            if (window.innerWidth <= 968) {
+                document.getElementById('sidebar').classList.remove('show');
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        // Simulate live data updates for attendees
+        function updateLiveMetrics() {
+            const attendeesCard = document.querySelector('.stats-card .number:nth-child(1)');
+            if (attendeesCard && attendeesCard.parentElement.querySelector('.label').textContent === 'Attendees') {
+                const current = parseInt(attendeesCard.textContent);
+                if (current < 400) {
+                    attendeesCard.textContent = current + Math.floor(Math.random() * 2) + 1;
+                }
+            }
+        }
+
+        // Update metrics every 15 seconds
+        setInterval(updateLiveMetrics, 15000);
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.querySelector('.toggle-sidebar');
+            
+            if (window.innerWidth <= 968 && 
+                !sidebar.contains(event.target) && 
+                !toggleButton.contains(event.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+
+        // Add smooth scrolling behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize with some animations
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.topic-card, .speaker-card, .paper-item');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.4s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth > 968) {
+                sidebar.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
