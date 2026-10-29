@@ -343,14 +343,14 @@
             border-color: rgba(74, 85, 104, 0.3);
         }
 
-        /* Speaker Bio Hover Popup */
+        /* Speaker Bio Hover Popup (Right Side Position) */
         .speaker-popup {
             position: absolute;
-            bottom: 105%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px) scale(0.95);
+            top: 0;
+            left: 105%;
+            transform: translateX(-10px) scale(0.95);
             width: 320px;
-            max-width: 90vw;
+            max-width: 80vw;
             padding: 1.25rem;
             background: rgba(28, 36, 52, 0.88);
             backdrop-filter: blur(12px);
@@ -369,21 +369,21 @@
             z-index: 100;
         }
 
+        /* Arrow pointing left towards the speaker card */
         .speaker-popup::after {
             content: '';
             position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 30px;
+            right: 100%;
             border-width: 8px;
             border-style: solid;
-            border-color: rgba(28, 36, 52, 0.88) transparent transparent transparent;
+            border-color: transparent rgba(28, 36, 52, 0.88) transparent transparent;
         }
 
         .speaker-card-container:hover .speaker-popup {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0) scale(1);
+            transform: translateX(0) scale(1);
         }
 
         .speaker-avatar {
@@ -484,6 +484,26 @@
             
             .about-grid {
                 grid-template-columns: 1fr;
+            }
+
+            /* On small screens, adjust popup to display below instead of side overflow */
+            .speaker-popup {
+                left: 50%;
+                top: 105%;
+                transform: translateX(-50%) translateY(-10px) scale(0.95);
+            }
+
+            .speaker-popup::after {
+                top: auto;
+                bottom: 100%;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                border-color: transparent transparent rgba(28, 36, 52, 0.88) transparent;
+            }
+
+            .speaker-card-container:hover .speaker-popup {
+                transform: translateX(-50%) translateY(0) scale(1);
             }
         }
 
@@ -592,7 +612,7 @@
                     <h2>Speakers</h2>
                     
                     <div class="speaker-grid">
-                        <!-- Blake Richards with Hover Bio Popup -->
+                        <!-- Blake Richards with Right-Side Bio Popup -->
                         <a href="https://sites.google.com/mila.quebec/linc-lab/team/blake" target="_blank" class="speaker-card-container">
                             <div class="speaker-popup">
                                 <strong>Blake Richards</strong> is Research Scientist Manager with the Paradigms of Intelligence team at Google, and an Associate Professor in the School of Computer Science and Department of Neurology and Neurosurgery at McGill University. He is also a Core Faculty Member at Mila (the Quebec AI institute). Richards’ research lies at the intersection of neuroscience and AI. His laboratory investigates universal principles of intelligence that apply to both natural and artificial agents. He has received several awards for his work, including a Schmidt Sciences Polymath Award in 2026, the NSERC Arthur B. McDonald Fellowship in 2022, the Canadian Association for Neuroscience Young Investigator Award in 2019, and a Canada CIFAR AI Chair in 2018. Richards was a Banting Postdoctoral Fellow at SickKids Hospital from 2011 to 2013. He obtained his PhD in neuroscience from the University of Oxford in 2010, and his BSc in cognitive science and AI from the University of Toronto in 2004.
